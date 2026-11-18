@@ -25,6 +25,8 @@ export const RUTAS: { ruta: Ruta; icono: string; nombre: string }[] = [
 export function bienvenida(ahora: Date): Html {
   return html`
     <section class="tarjeta bienvenida">
+      <p class="marca">NAOSA</p>
+      <p class="nota">Not Another Obscure Sober Companion App</p>
       <h1>¿Desde cuándo?</h1>
       <p>Indica cuándo fue tu última copa. Todo se guarda solo en este dispositivo.</p>
       <form data-accion="empezar">
@@ -161,7 +163,8 @@ export function ajustes(estado: Estado, ahora: Date): Html {
     <p class="nota aviso">
       Esta app no es consejo médico. Si bebías mucho y a diario, dejarlo de golpe puede ser peligroso:
       consúltalo con tu médico.
-    </p>`;
+    </p>
+    <p class="nota aviso">NAOSA · Not Another Obscure Sober Companion App</p>`;
 }
 
 export function navegacion(actual: Ruta): Html {

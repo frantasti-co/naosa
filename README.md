@@ -1,4 +1,6 @@
-# Sobriedad
+# NAOSA
+
+**Not Another Obscure Sober Companion App.**
 
 PWA personal para contar el tiempo sin beber alcohol. Muestra el contador, logros de salud
 con su fuente, medallas por tiempo superado y una frase del día con algo de gracia.
@@ -45,7 +47,7 @@ interpola. No uses `innerHTML` con cadenas montadas a mano.
 
 ## Datos guardados
 
-Una única clave en `localStorage`, `sobriedad:estado`:
+Una única clave en `localStorage`, `naosa:estado`:
 
 ```json
 { "version": 1, "inicio": "2026-11-18T09:30:00.000Z", "mejorRacha": 0 }

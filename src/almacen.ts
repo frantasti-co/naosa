@@ -1,7 +1,7 @@
 /** Persistencia en localStorage. Es la única parte que toca el almacenamiento. */
 import { leerEstado, type Estado } from './core/estado';
 
-const CLAVE = 'sobriedad:estado';
+const CLAVE = 'naosa:estado';
 
 export function cargar(): Estado | null {
   try {
@@ -25,7 +25,7 @@ export function exportar(estado: Estado): void {
   const blob = new Blob([JSON.stringify(estado, null, 2)], { type: 'application/json' });
   const enlace = document.createElement('a');
   enlace.href = URL.createObjectURL(blob);
-  enlace.download = `sobriedad-${new Date().toISOString().slice(0, 10)}.json`;
+  enlace.download = `naosa-${new Date().toISOString().slice(0, 10)}.json`;
   enlace.click();
   URL.revokeObjectURL(enlace.href);
 }

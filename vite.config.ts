@@ -9,8 +9,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icono.svg', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Sobriedad',
-        short_name: 'Sobriedad',
+        name: 'NAOSA - Not Another Obscure Sober Companion App',
+        short_name: 'NAOSA - Not Another Obscure Sober Companion App',
         description: 'Contador de días sin alcohol, logros de salud y medallas.',
         lang: 'es',
         theme_color: '#2f7d5b',

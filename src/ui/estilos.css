@@ -147,3 +147,4 @@ nav a {
 }
 nav a span { font-size: 1.3rem; }
 nav a.activa { color: var(--acento); font-weight: 600; }
+.marca { font-size: 2rem; font-weight: 800; letter-spacing: 0.08em; color: var(--acento); margin: 0; }
