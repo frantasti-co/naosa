@@ -5,10 +5,19 @@ export interface Fuente {
   url: string;
 }
 
-/** Beneficio para la salud respaldado por una fuente. */
+/** "cuerpo": salud física, siempre con fuente. "cabeza": salud mental, con humor y sin fechas estrictas. */
+export type Categoria = 'cuerpo' | 'cabeza';
+
 export interface LogroSalud extends Hito {
+  categoria: Categoria;
   titulo: string;
   texto: string;
+  fuente?: Fuente;
+}
+
+/** Logro de salud física: la fuente es obligatoria. */
+export interface LogroCuerpo extends LogroSalud {
+  categoria: 'cuerpo';
   fuente: Fuente;
 }
 

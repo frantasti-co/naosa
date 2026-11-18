@@ -1,0 +1,73 @@
+import { dias } from '../core/tiempo';
+import type { LogroSalud } from './tipos';
+
+/*
+ * Logros de salud mental ("cabeza"). Van con humor y sin fuente: son lo que se suele
+ * notar, no una promesa con fecha exacta. Tono: gracioso, nada de autoayuda de taza.
+ * Junto con los de cuerpo tienen que cumplir el calendario (ver CONTENIDO.md).
+ */
+const logro = (dia: number, titulo: string, texto: string): LogroSalud => ({
+  id: `cabeza-${dia}`,
+  tras: dias(dia),
+  categoria: 'cabeza',
+  titulo,
+  texto,
+});
+
+export const LOGROS_CABEZA: readonly LogroSalud[] = [
+  logro(1, 'Cero "¿qué dije anoche?"', 'Hoy no hay que reconstruir la noche a partir de fotos y testigos. Tu memoria, intacta y a tu servicio.'),
+  logro(2, 'Adiós a la ansiedad de resaca', 'Esa sensación de haber hecho algo terrible sin saber qué tiene nombre: "hangxiety". Hoy no ha venido a trabajar.'),
+  logro(4, 'Decisiones tomadas en sobrio', 'Todo lo que has decidido esta semana lo has decidido tú, no tu versión de las 2 de la mañana.'),
+  logro(5, 'El móvil ya no da miedo', 'Desbloqueas el teléfono por la mañana sin taparte un ojo. Nada que borrar, nada que explicar.'),
+  logro(6, 'Primer "no, gracias" sin drama', 'Has rechazado una copa y el mundo ha seguido girando. Ni siquiera ha temblado un poco.'),
+  logro(10, 'La cabeza deja de hacer ruido', 'Menos niebla mental. Las ideas llegan solas y en orden, como en una cola bien organizada.'),
+  logro(13, 'Autoestima en modo ahorro', 'Llevas casi dos semanas cumpliendo algo que te propusiste. A tu ego le está sentando de maravilla.'),
+  logro(16, 'Menos culpa los lunes', 'El lunes ya solo es malo por ser lunes, no por lo que pasó el sábado.'),
+  logro(35, 'Paciencia desbloqueada', 'Las colas, los atascos y los correos de "como te comenté" te alteran un poco menos. Un poco.'),
+  logro(49, 'Siete semanas de autoestima', 'Has cumplido 49 días seguidos una promesa contigo. Hay contratos que se cumplen peor.'),
+  logro(56, 'Planes que se cumplen', 'Cuando dices "el sábado por la mañana hago X", el sábado por la mañana haces X. Inquietante.'),
+  logro(63, 'Conversaciones que recuerdas', 'Ahora te acuerdas de lo que te contaron. Tus amistades empiezan a sospechar que les escuchas.'),
+  logro(70, 'Estrés gestionado sin vaso', 'Has tenido días malos y los has superado sin anestesia líquida. Eso es una habilidad, no suerte.'),
+  logro(77, 'Domingos sin bajón', 'El domingo por la tarde ya no viene con ese pozo emocional de serie. Ahora es solo domingo.'),
+  logro(84, 'Doce semanas de cabeza propia', 'Tres meses casi. Tu cerebro empieza a dar por hecho que esto va en serio.'),
+  logro(91, 'El primer trimestre emocional', 'Un trimestre entero. Si fueras una empresa, presentarías resultados con orgullo.'),
+  logro(98, 'Menos montaña rusa', 'Los altibajos de humor se han aplanado. La vida sigue teniendo curvas, pero ya no es un looping.'),
+  logro(105, 'Confianza de vuelta', 'La gente vuelve a contar contigo para cosas importantes. Y tú también cuentas contigo.'),
+  logro(112, 'Mente más rápida', 'Encuentras las palabras a la primera y las llaves a la segunda. Progreso.'),
+  logro(119, 'El aburrimiento ya no asusta', 'Has descubierto que aburrirse un rato no mata. Hasta da ideas.'),
+  logro(126, 'Te ríes más (y te acuerdas)', 'Las risas siguen ahí, solo que ahora sabes de qué te reías.'),
+  logro(133, 'Fiestas en modo antropólogo', 'Vas, observas, te ríes, te vas a casa. Y al día siguiente tienes material de sobra.'),
+  logro(140, 'Veinte semanas sin piloto automático', 'Ya no bebes por inercia porque ya no bebes. La inercia ahora trabaja a tu favor.'),
+  logro(147, 'Duermes con la conciencia tranquila', 'Te acuestas sin repasar mentalmente la lista de cosas que no deberías haber dicho.'),
+  logro(154, 'Límites con estilo', 'Decir que no ya no te cuesta una explicación de cinco minutos. Basta con una sonrisa.'),
+  logro(161, 'Creatividad en pie', 'Resulta que las buenas ideas también aparecen a las 10 de la mañana con café.'),
+  logro(168, 'Ansiedad social, nivel usuario', 'Has sobrevivido a reuniones sociales enteras con la única ayuda de un refresco y tu encanto natural.'),
+  logro(175, 'Veinticinco semanas de calma', 'Lo que antes te desbordaba ahora te molesta. Molestar es bastante mejor que desbordar.'),
+  logro(182, 'Medio año de cabeza fría', 'Seis meses decidiendo en frío. Tu cuenta, tu agenda y tu dignidad lo notan.'),
+  logro(189, 'Recuerdos en alta definición', 'Medio año de recuerdos completos, sin huecos ni escenas eliminadas.'),
+  logro(196, 'El cuerpo te pide planes, no copas', 'Cuando te apetece "salir", piensas en hacer cosas, no en dónde tomar algo.'),
+  logro(203, 'Concentración de cirujano', 'Lees un capítulo entero sin perder el hilo. Hasta una película de tres horas, si te pones.'),
+  logro(210, 'Siete meses de coherencia', 'Lo que piensas, lo que dices y lo que haces van más o menos en la misma dirección. Raro y agradable.'),
+  logro(217, 'Menos pensamiento catastrófico', 'Esa vocecita que imaginaba lo peor ha bajado el volumen. Sigue ahí, pero ya no grita.'),
+  logro(224, 'Paciencia contigo', 'Cuando algo sale mal, te lo tomas con más humor y menos drama. Te tratas como a alguien que te cae bien.'),
+  logro(231, 'Treinta y tres semanas de energía mental', 'Ya no te pasas el fin de semana recuperándote. Lo pasas viviéndolo, qué cosas.'),
+  logro(238, 'Experto en tus propios disparadores', 'Sabes qué situaciones te tientan y las ves venir de lejos. Radar instalado.'),
+  logro(245, 'Relaciones más sinceras', 'Las conversaciones importantes ya no se tienen a gritos a las 3 de la mañana. Se tienen, y se recuerdan.'),
+  logro(252, 'Treinta y seis semanas de buena memoria', 'Te acuerdas de cumpleaños, nombres y promesas. Tu agenda está empezando a sentirse innecesaria.'),
+  logro(259, 'El "y si me tomo una" pierde fuerza', 'La idea aparece de vez en cuando, pero ya no tiene ni la mitad de poder de convicción.'),
+  logro(266, 'Sentido del humor afinado', 'Tus chistes ahora tienen ritmo, pausa y remate. Y te acuerdas del remate.'),
+  logro(273, 'Nueve meses de cabeza propia', 'Nueve meses. Lo que estás gestando es una versión de ti con mucha mejor cara.'),
+  logro(280, 'Las celebraciones ya no dan miedo', 'Navidades, bodas, cumpleaños: has descubierto que se puede brindar con cualquier cosa.'),
+  logro(287, 'Duelo por la copa superado', 'Ya no la echas de menos como antes. A veces ni te acuerdas de que existía.'),
+  logro(294, 'Te conoces mejor', 'Sabes lo que te gusta hacer cuando no hay alcohol de por medio. Spoiler: bastantes cosas.'),
+  logro(301, 'Calma de serie', 'Los imprevistos te pillan con la cabeza despejada. Resolver problemas sobrio es casi trampa.'),
+  logro(308, 'Orgullo discreto', 'No lo vas contando por ahí, pero por dentro llevas una pancarta y una banda de música.'),
+  logro(315, 'Cuarenta y cinco semanas de foco', 'Terminas lo que empiezas con una frecuencia que empieza a ser preocupante.'),
+  logro(322, 'Sin cuentas pendientes con tu yo de ayer', 'Hace mucho que no tienes que pedirte perdón por nada de la noche anterior.'),
+  logro(329, 'Tus planes de futuro existen', 'Ya piensas en el año que viene con ganas y no con dolor de cabeza.'),
+  logro(336, 'Cuarenta y ocho semanas de estabilidad', 'Tus semanas se parecen a lo que planeas. Bueno, más o menos. Más que antes, seguro.'),
+  logro(343, 'Te tomas en serio (sin tomarte demasiado en serio)', 'Te respetas lo suficiente para cuidarte y te ríes lo suficiente para no darte la tabarra.'),
+  logro(350, 'Cincuenta semanas, cero arrepentimientos de madrugada', 'Ni una sola llamada, mensaje o declaración de amor que haya que desmentir al día siguiente.'),
+  logro(357, 'Recta final con la cabeza alta', 'Queda una semana para el año. Ya sabes que lo vas a conseguir, y eso también es salud mental.'),
+  logro(364, 'La cabeza que tenías ganas de tener', 'Un año casi entero pensando con claridad. Tu cerebro te manda un abrazo, sin resaca.'),
+];

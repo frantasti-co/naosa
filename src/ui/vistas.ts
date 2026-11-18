@@ -88,23 +88,30 @@ function barra(progreso: number): Html {
   </div>`;
 }
 
+/** Cuántos próximos logros se enseñan en la vista de salud. */
+const PROXIMOS_VISIBLES = 5;
+
 export function logros(estado: Estado, ahora: Date): Html {
   const ms = transcurrido(new Date(estado.inicio), ahora);
   const pendientes = proximos(LOGROS_SALUD, ms, Infinity);
+  const visibles = pendientes.slice(0, PROXIMOS_VISIBLES);
   const conseguidos = alcanzados(LOGROS_SALUD, ms);
 
   return html`
     <h1>Salud</h1>
     ${pendientes.length > 0
       ? html`<h2>Próximos</h2>
-          ${pendientes.map(
+          ${visibles.map(
             (p, i) => html`
               <article class="tarjeta logro">
-                <p class="cuando">A ${describirDuracion(p.hito.tras)} · faltan ${formatoFalta(p.falta)}</p>
+                <p class="cuando">${etiqueta(p.hito)} · a ${describirDuracion(p.hito.tras)} · faltan ${formatoFalta(p.falta)}</p>
                 <h3>${p.hito.titulo}</h3>
                 ${i === 0 ? barra(p.progreso) : ''}
               </article>`,
-          )}`
+          )}
+          ${pendientes.length > visibles.length
+            ? html`<p class="nota">Y ${pendientes.length - visibles.length} más esperando su turno.</p>`
+            : ''}`
       : ''}
     <h2>Conseguidos</h2>
     ${conseguidos.length > 0
@@ -112,13 +119,17 @@ export function logros(estado: Estado, ahora: Date): Html {
       : html`<p class="nota">El primero llega a los ${describirDuracion(pendientes[0].hito.tras)}.</p>`}`;
 }
 
+const etiqueta = (logro: LogroSalud): string => (logro.categoria === 'cuerpo' ? '🫀 Cuerpo' : '🧠 Cabeza');
+
 function tarjetaLogro(logro: LogroSalud): Html {
   return html`
     <article class="tarjeta logro conseguido">
-      <p class="cuando">✓ ${describirDuracion(logro.tras)}</p>
+      <p class="cuando">✓ ${describirDuracion(logro.tras)} · ${etiqueta(logro)}</p>
       <h3>${logro.titulo}</h3>
       <p>${logro.texto}</p>
-      <p class="fuente">Fuente: <a href="${logro.fuente.url}" target="_blank" rel="noopener">${logro.fuente.nombre}</a></p>
+      ${logro.fuente
+        ? html`<p class="fuente">Fuente: <a href="${logro.fuente.url}" target="_blank" rel="noopener">${logro.fuente.nombre}</a></p>`
+        : ''}
     </article>`;
 }
 

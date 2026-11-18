@@ -3,7 +3,7 @@
 **Not Another Obscure Sober Companion App.**
 
 PWA personal para contar el tiempo sin beber alcohol. Muestra el contador, logros de salud
-con su fuente, medallas por tiempo superado y cinco frases al día con algo de gracia.
+(físicos, con su fuente, y mentales, con humor), medallas por tiempo superado y cinco frases al día con algo de gracia.
 Está pensada para acompañar el primer año.
 
 - **Sin servidor ni cuentas.** Los datos viven en el `localStorage` del dispositivo.
@@ -32,7 +32,7 @@ src/
     hitos.ts     Hitos conseguidos y próximos con su progreso
     frases.ts    Las 5 frases del día
     estado.ts    Formato de los datos guardados y su validación
-  data/        Contenido editable: logros de salud, medallas y frases
+  data/        Contenido editable: logros de salud (cuerpo y cabeza), medallas y frases (frases.txt)
   ui/          Vistas (funciones que devuelven HTML), estilos y utilidades
   almacen.ts   Única parte que toca localStorage
   main.ts      Arranque, navegación por hash y eventos

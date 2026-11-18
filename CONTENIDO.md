@@ -6,15 +6,27 @@ frases duplicadas ni logros sin fuente.
 
 Las duraciones se escriben con `dias(n)` o `horas(n)` (de `src/core/tiempo.ts`).
 
-## Frases del día (`frases.ts`)
+## Frases del día (`frases.txt`)
 
-Una cadena por línea. Cada día tocan 5 frases seguidas de la lista: la home enseña la
-primera y el botón "Otra frase" pasa a la siguiente, hasta 5. Al día siguiente se sigue
-por donde se quedó, y al llegar al final la lista da la vuelta. Cuantas más frases haya,
-más tardan en repetirse (5 al día: 120 frases dan para 24 días).
+Una frase por línea en `src/data/frases.txt`. Cada día tocan 5 frases seguidas de la
+lista: la home enseña la primera y el botón "Otra frase" pasa a la siguiente, hasta 5.
+Al día siguiente se sigue por donde se quedó. Hay al menos 365 × 5 = 1.825 frases, así
+que no se repite ninguna en todo el año (el test lo comprueba).
 
 Criterio: **con gracia y sin sermones.** Nada de autoayuda de taza ("cree en ti"),
-nada religioso, nada que culpe. Si suena a cartel de gimnasio, fuera.
+nada religioso, nada que culpe. Si suena a cartel de gimnasio, fuera. Escribe en
+segunda persona sin marcar género ("quien no bebe", no "el que no bebe").
+
+## Calendario del primer año
+
+Tanto los logros de salud (cuerpo + cabeza juntos) como las medallas tienen que cumplir:
+
+- Semana 1: al menos uno cada día (días 1 a 7).
+- Semana 2: como mucho 3 días entre uno y el siguiente.
+- Semana 3: como mucho 5 días.
+- Desde ahí: como mucho 7 días, hasta llegar al día 365.
+
+`npm test` falla si se rompe, y dice dónde está el hueco.
 
 ## Medallas (`medallas.ts`)
 
@@ -26,19 +38,25 @@ nada religioso, nada que culpe. Si suena a cartel de gimnasio, fuera.
 - El orden de la lista es el orden en pantalla; mantenlo por duración.
 - La app está pensada para el primer año: casi todas caen antes del día 365.
 
-## Logros de salud (`salud.ts`)
+## Logros de salud
+
+Hay dos tipos:
+
+- **Cabeza** (`salud-cabeza.ts`): salud mental, con humor. No necesitan fuente ni fecha
+  estricta: son lo que se suele notar, no una promesa. Se añaden con una línea:
+  `logro(70, 'Título', 'Texto con gracia.')`.
+- **Cuerpo** (`salud-cuerpo.ts`): salud física. Siempre con fuente, con estas reglas:
 
 ```ts
 {
   id: 'algo-descriptivo',
   tras: dias(90),
+  categoria: 'cuerpo',
   titulo: 'Título corto',
   texto: 'Qué pasa, en una o dos frases.',
   fuente: { nombre: 'NHS', url: 'https://...' },
 },
 ```
-
-Reglas, porque aquí es fácil inventarse cosas:
 
 1. **Siempre con fuente fiable**: organismos de salud (NHS, OMS/IARC, NIH/MedlinePlus,
    CDC), organizaciones especializadas (Drinkaware, British Liver Trust) o estudios
@@ -49,7 +67,7 @@ Reglas, porque aquí es fácil inventarse cosas:
 3. Si una fuente se repite, defínela una vez como constante arriba del archivo.
 4. Cita cifras de estudios como lo que son: "en un estudio con…", con su tamaño si cabe.
 
-### Fuentes usadas ahora
+### Fuentes usadas ahora (cuerpo)
 
 | Logro | Fuente |
 | --- | --- |
