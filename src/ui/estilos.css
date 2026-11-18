@@ -69,8 +69,11 @@ a { color: var(--acento); }
   border-left: 4px solid var(--acento);
   background: var(--acento-suave);
   border-radius: 0 var(--radio) var(--radio) 0;
-  font-size: 1.05rem;
 }
+.frase blockquote { margin: 0; font-size: 1.05rem; }
+.frase figcaption { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; }
+.frase figcaption .nota { margin: 0; }
+.frase button { background: var(--superficie); padding: 6px 12px; font-size: 0.9rem; }
 
 .nombre { font-weight: 600; margin: 0 0 8px; }
 

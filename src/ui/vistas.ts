@@ -3,7 +3,7 @@
  * No leen ni escriben estado; los eventos se gestionan en main.ts.
  */
 import type { Estado } from '../core/estado';
-import { fraseDelDia } from '../core/frases';
+import { frasesDelDia } from '../core/frases';
 import { alcanzados, proximos, type HitoPendiente } from '../core/hitos';
 import { describirDuracion, desglosar, transcurrido } from '../core/tiempo';
 import { FRASES } from '../data/frases';
@@ -36,11 +36,15 @@ export function bienvenida(ahora: Date): Html {
     </section>`;
 }
 
-export function inicio(estado: Estado, ahora: Date): Html {
+/** `fraseActual` es cuál de las frases de hoy se enseña (0 = la primera). */
+export function inicio(estado: Estado, ahora: Date, fraseActual = 0): Html {
   const ms = transcurrido(new Date(estado.inicio), ahora);
   const t = desglosar(ms);
   const [siguiente] = proximos(LOGROS_SALUD, ms, 1);
   const [medalla] = proximos(MEDALLAS, ms, 1);
+  const frases = frasesDelDia(FRASES, ahora);
+  const actual = Math.min(fraseActual, frases.length - 1);
+  const quedan = actual < frases.length - 1;
 
   return html`
     <section class="contador">
@@ -49,7 +53,15 @@ export function inicio(estado: Estado, ahora: Date): Html {
       <div class="reloj">${dos(t.horas)}:${dos(t.minutos)}:${dos(t.segundos)}</div>
     </section>
 
-    <blockquote class="frase">${fraseDelDia(FRASES, ahora)}</blockquote>
+    <figure class="frase">
+      <blockquote>${frases[actual]}</blockquote>
+      <figcaption>
+        <span class="nota">Frase ${actual + 1} de ${frases.length}</span>
+        ${quedan
+          ? html`<button class="secundario" data-accion="otra-frase">Otra frase</button>`
+          : html`<span class="nota">Por hoy ya está. Mañana, más.</span>`}
+      </figcaption>
+    </figure>
 
     ${siguiente ? tarjetaProxima('Próximo logro de salud', siguiente.hito.titulo, siguiente) : ''}
     ${medalla ? tarjetaProxima('Próxima medalla', `${medalla.hito.emoji} ${medalla.hito.nombre}`, medalla) : ''}

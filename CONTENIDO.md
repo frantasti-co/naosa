@@ -8,7 +8,10 @@ Las duraciones se escriben con `dias(n)` o `horas(n)` (de `src/core/tiempo.ts`).
 
 ## Frases del día (`frases.ts`)
 
-Una cadena por línea. Se muestra una al día, en orden, y la lista da la vuelta.
+Una cadena por línea. Cada día tocan 5 frases seguidas de la lista: la home enseña la
+primera y el botón "Otra frase" pasa a la siguiente, hasta 5. Al día siguiente se sigue
+por donde se quedó, y al llegar al final la lista da la vuelta. Cuantas más frases haya,
+más tardan en repetirse (5 al día: 120 frases dan para 24 días).
 
 Criterio: **con gracia y sin sermones.** Nada de autoayuda de taza ("cree en ti"),
 nada religioso, nada que culpe. Si suena a cartel de gimnasio, fuera.
@@ -21,6 +24,7 @@ nada religioso, nada que culpe. Si suena a cartel de gimnasio, fuera.
 
 - `id`: único y estable. No lo cambies una vez publicado.
 - El orden de la lista es el orden en pantalla; mantenlo por duración.
+- La app está pensada para el primer año: casi todas caen antes del día 365.
 
 ## Logros de salud (`salud.ts`)
 
@@ -51,6 +55,15 @@ Reglas, porque aquí es fácil inventarse cosas:
 | --- | --- |
 | Pico de abstinencia (24–72 h) | [MedlinePlus: Alcohol withdrawal](https://medlineplus.gov/ency/article/000764.htm) |
 | Energía y sueño | [Drinkaware: What to expect when you stop drinking](https://www.drinkaware.co.uk/advice-and-support/help-to-stop-drinking-completely/what-to-expect-when-you-stop-drinking) |
+| Materia gris a las 2 semanas | [van Eijk et al. 2013, Alcohol Clin Exp Res](https://pubmed.ncbi.nlm.nih.gov/23072363/), 49 pacientes con dependencia |
 | Hígado graso reversible | [NHS: Alcohol-related liver disease](https://www.nhs.uk/conditions/alcohol-related-liver-disease-arld/) |
+| Ánimo hacia la semana 4 | [Gopaldas et al. 2025](https://www.recoveryanswers.org/research-post/how-depression-and-anxiety-change-during-treatment-for-alcohol-use-disorder/), 1.005 pacientes en tratamiento |
 | Un mes: tensión, insulina, GGT, peso | [Mehta et al. 2018, BMJ Open 8:e020673](https://bmjopen.bmj.com/content/8/5/e020673), 94 bebedores habituales |
+| Encuesta Dry January | [Universidad de Sussex 2018](https://www.sussex.ac.uk/news/article/47131-how-dry-january-is-the-secret-to-better-sleep-saving-money-and-losing-weight), más de 800 participantes |
+| GGT (2–6 semanas) y VCM (3 meses) | [Current Psychiatry 2017: biomarcadores de alcohol](https://mdedge.com/content/im-sober-doctor-really-best-biomarkers-underreported-alcohol-use) |
+| Fibrilación auricular a los 6 meses | [Voskoboinik et al. 2020, NEJM](https://pubmed.ncbi.nlm.nih.gov/31893513/), ensayo con 140 personas |
+| Grosor de la corteza a los 7,3 meses | [Durazzo et al. 2023, Alcohol](https://pubmed.ncbi.nlm.nih.gov/37657667/), 88 personas tras tratamiento |
 | Cáncer de boca y esófago | [IARC Handbook 20A (2023)](https://www.iarc.who.int/faq/iarc-handbooks-of-cancer-prevention-volume-20a-reduction-or-cessation-of-alcohol-consumption) |
+
+Ojo: varios estudios son con personas con dependencia o en tratamiento. El texto de cada
+logro dice con quién se midió para no venderlo como algo universal.

@@ -5,11 +5,21 @@
 import './ui/estilos.css';
 import * as almacen from './almacen';
 import { estadoNuevo, reiniciar, type Estado } from './core/estado';
+import { FRASES_POR_DIA, numeroDeDia } from './core/frases';
 import * as vistas from './ui/vistas';
 import { RUTAS, type Ruta } from './ui/vistas';
 
 const app = document.querySelector<HTMLElement>('#app')!;
 const nav = document.querySelector<HTMLElement>('#nav')!;
+
+/** Qué frase del día se está enseñando. Vuelve a la primera al cambiar de día. */
+const frase = { dia: numeroDeDia(new Date()), indice: 0 };
+
+function fraseActual(ahora: Date): number {
+  const hoy = numeroDeDia(ahora);
+  if (hoy !== frase.dia) Object.assign(frase, { dia: hoy, indice: 0 });
+  return frase.indice;
+}
 
 function rutaActual(): Ruta {
   const ruta = location.hash.replace('#/', '');
@@ -27,7 +37,10 @@ function pintar(): void {
   }
   const ruta = rutaActual();
   nav.innerHTML = vistas.navegacion(ruta).texto;
-  app.innerHTML = vistas[ruta](estado, ahora).texto;
+  app.innerHTML =
+    ruta === 'inicio'
+      ? vistas.inicio(estado, ahora, fraseActual(ahora)).texto
+      : vistas[ruta](estado, ahora).texto;
 }
 
 function actualizar(cambio: (estado: Estado) => Estado): void {
@@ -65,6 +78,10 @@ app.addEventListener('click', (evento) => {
   if (!accion || !estado) return;
 
   switch (accion) {
+    case 'otra-frase':
+      frase.indice = Math.min(fraseActual(new Date()) + 1, FRASES_POR_DIA - 1);
+      pintar();
+      break;
     case 'reiniciar':
       if (confirm('¿Reiniciar el contador? Tu mejor racha se guarda.')) {
         actualizar((e) => reiniciar(e, new Date()));
