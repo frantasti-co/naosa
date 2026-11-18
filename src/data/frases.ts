@@ -1,0 +1,36 @@
+/*
+ * Frases del día. Reglas: con gracia, sin autoayuda de taza ni nada religioso.
+ * Se muestra una al día, en orden; añadir o quitar no rompe nada.
+ */
+export const FRASES: readonly string[] = [
+  'Hoy tu hígado no ha tenido que hacer horas extra. Ni se lo cree.',
+  'Recuerdas todo lo que dijiste anoche. Para bien y para mal.',
+  'El agua con gas es básicamente champán sin consecuencias.',
+  'Nadie en la historia se ha arrepentido de no mandar un audio a las 3 de la mañana.',
+  'Tu cartera te manda saludos. Dice que está engordando.',
+  'Domingo por la mañana, cabeza despejada. Esto antes era leyenda urbana.',
+  'Ser el conductor oficial también es un cargo político.',
+  'La resaca no es un estado de ánimo. Ya no tienes que fingir que sí.',
+  'Hoy no hace falta buscar el móvil, las llaves y la dignidad.',
+  'Las fotos de esta noche van a salir enfocadas. Prepárate.',
+  'Bailar sobrio es un deporte de riesgo. Tú decides si lo practicas.',
+  'Tu yo de mañana te ha dejado una reseña de cinco estrellas.',
+  'Pide un mosto con toda la seguridad de quien pide un gran reserva.',
+  'Tu móvil ya no tiene ese historial de mensajes que hay que borrar al día siguiente.',
+  'Los camareros te recuerdan por tu propina, no por tu espectáculo.',
+  'Dormir ocho horas seguidas: la droga de diseño de los adultos.',
+  'Hoy la única cosa que se ha subido a la cabeza es tu ego. Y te lo has ganado.',
+  'Tus anécdotas de esta semana tienen principio, nudo y desenlace.',
+  'El kebab de las 4 de la mañana sigue esperándote. Seguirá esperando.',
+  'Ya no pagas impuestos especiales sobre el alcohol. Hacienda llora en silencio.',
+  'Un sábado sin resaca es un domingo extra. Es matemática.',
+  'Ahora cuando dices "me tomo una y me voy" es verdad.',
+  'Tu sofá y tú tenéis una relación sana. Eso es más de lo que muchos pueden decir.',
+  'Las reuniones de los lunes siguen siendo horribles, pero tú llegas entero.',
+  'Las 7 de la mañana existen. Hay gente ahí. Saludan.',
+  'Te has convertido en la persona a la que todos piden que les lleve a casa. Poder absoluto.',
+  'Has descubierto que la gente aburrida sigue siendo aburrida con cerveza.',
+  'Tu piel, tu estómago y tu banco han firmado un acuerdo de paz.',
+  'El café vuelve a ser café, no un desfibrilador.',
+  'Hoy el único que va contentillo es tu contador de días.',
+];
