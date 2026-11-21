@@ -1,0 +1,56 @@
+# Construye el APK de Android (Capacitor) en cada PR y en cada push a main.
+# En main además lo publica en la release "apk":
+#   https://github.com/frantasti-co/naosa/releases/latest/download/naosa.apk
+name: APK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: android-actions/setup-android@v3
+      - run: npm ci
+      - run: npm test
+      - run: npm run build:android
+      - name: Compilar APK
+        working-directory: android
+        env:
+          VERSION_CODE: ${{ github.run_number }}
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon
+          cp app/build/outputs/apk/release/app-release.apk ../naosa.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: naosa-apk
+          path: naosa.apk
+      - name: Publicar en la release "apk"
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view apk >/dev/null 2>&1 || \
+            gh release create apk --title "NAOSA para Android" \
+              --notes "APK para instalar a mano. Se actualiza en cada cambio de main."
+          gh release upload apk naosa.apk --clobber

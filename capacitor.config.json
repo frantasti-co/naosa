@@ -1,0 +1,8 @@
+{
+  "appId": "co.frantasti.naosa",
+  "appName": "NAOSA",
+  "webDir": "dist",
+  "android": {
+    "backgroundColor": "#f6f4ef"
+  }
+}

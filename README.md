@@ -65,6 +65,25 @@ GitHub Actions**. La app queda en `https://<usuario>.github.io/<repo>/`.
 
 Para instalarla en el móvil, abre esa URL y usa "Añadir a pantalla de inicio".
 
+## APK de Android (Capacitor)
+
+La misma app empaquetada en un APK para instalar a mano, sin Google Play. Todo va dentro
+del APK, así que funciona sin conexión y sin service worker. Los datos se guardan en el
+almacenamiento de la app (no se comparten con la versión web: para pasarlos, exporta e
+importa la copia JSON). En el APK, "Exportar" abre el menú de compartir de Android.
+
+- `.github/workflows/apk.yml` construye el APK en cada PR (artefacto `naosa-apk`) y, en
+  cada push a `main`, lo publica en la release `apk`:
+  `https://github.com/<usuario>/<repo>/releases/latest/download/naosa.apk`
+- En local (con Android SDK y Java 21): `npm run apk` → `android/app/build/outputs/apk/release/`.
+- Si tocas el código web, `npm run build:android` lo copia al proyecto Android.
+- Va firmado con `android/app/naosa.keystore` (contraseña `naosa-apk`), siempre la misma,
+  para que cada APK nuevo se instale encima del anterior sin perder datos. La clave está en
+  el repo a propósito porque es una app personal; para una tienda habría que cambiarla.
+
+Para instalarlo: abre el enlace en el móvil, descarga y acepta "Instalar apps de origen
+desconocido" para el navegador cuando Android lo pida.
+
 ## Fuera de alcance (a propósito)
 
 Notificaciones push, gráficas, varios contadores y sincronización entre dispositivos.
