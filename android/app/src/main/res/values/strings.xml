@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">NAOSA</string>
+    <string name="title_activity_main">NAOSA</string>
+    <string name="package_name">co.frantasti.naosa</string>
+    <string name="custom_url_scheme">co.frantasti.naosa</string>
+</resources>

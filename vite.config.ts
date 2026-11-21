@@ -2,9 +2,14 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 // BASE_PATH lo pone la Action de GitHub Pages ("/nombre-del-repo/"). En local es "/".
+// CAPACITOR=1 construye para el APK: los archivos ya van dentro de la app,
+// así que no hace falta service worker (y así no se queda una versión vieja en caché).
+const capacitor = process.env.CAPACITOR === '1';
+
 export default defineConfig({
-  base: process.env.BASE_PATH ?? '/',
+  base: capacitor ? '/' : (process.env.BASE_PATH ?? '/'),
   plugins: [
+    !capacitor &&
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['icono.svg', 'apple-touch-icon.png'],

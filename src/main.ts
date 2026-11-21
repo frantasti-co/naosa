@@ -89,7 +89,8 @@ app.addEventListener('click', (evento) => {
       }
       break;
     case 'exportar':
-      almacen.exportar(estado);
+      // Cerrar el menú de compartir sin elegir nada también "falla": no hay nada que avisar.
+      almacen.exportar(estado).catch(() => {});
       break;
     case 'borrar':
       if (confirm('¿Borrar todos los datos de este dispositivo? No se puede deshacer.')) {

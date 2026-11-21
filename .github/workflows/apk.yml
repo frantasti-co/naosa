@@ -1,0 +1,65 @@
+# Construye el APK de Android (Capacitor) en cada PR y en cada push a main.
+# En main lo publica en la release "apk":
+#   https://github.com/frantasti-co/naosa/releases/latest/download/naosa.apk
+# Los PR lo publican en la pre-release "apk-prueba" (para probar antes de fusionar):
+#   https://github.com/frantasti-co/naosa/releases/download/apk-prueba/naosa.apk
+name: APK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      # ubuntu-latest ya trae el Android SDK (ANDROID_HOME); Gradle baja lo que falte.
+      - run: npm ci
+      - run: npm test
+      - run: npm run build:android
+      - name: Compilar APK
+        working-directory: android
+        env:
+          VERSION_CODE: ${{ github.run_number }}
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon
+          cp app/build/outputs/apk/release/app-release.apk ../naosa.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: naosa-apk
+          path: naosa.apk
+      - name: Publicar el APK
+        # Los PR desde forks no tienen permiso de escritura: ahí basta con el artefacto.
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$GITHUB_REF" = refs/heads/main ]; then
+            tag=apk; titulo="NAOSA para Android"; extra=""
+            notas="APK para instalar a mano. Se actualiza en cada cambio de main."
+          else
+            tag=apk-prueba; titulo="NAOSA para Android (prueba)"; extra="--prerelease"
+            notas="APK de prueba del último PR. No es la versión estable."
+          fi
+          gh release view "$tag" >/dev/null 2>&1 || \
+            gh release create "$tag" --title "$titulo" --notes "$notas" --target "$GITHUB_SHA" $extra
+          gh release upload "$tag" naosa.apk --clobber
