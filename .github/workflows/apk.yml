@@ -1,6 +1,8 @@
 # Construye el APK de Android (Capacitor) en cada PR y en cada push a main.
-# En main además lo publica en la release "apk":
+# En main lo publica en la release "apk":
 #   https://github.com/frantasti-co/naosa/releases/latest/download/naosa.apk
+# Los PR lo publican en la pre-release "apk-prueba" (para probar antes de fusionar):
+#   https://github.com/frantasti-co/naosa/releases/download/apk-prueba/naosa.apk
 name: APK
 
 on:
@@ -45,12 +47,19 @@ jobs:
         with:
           name: naosa-apk
           path: naosa.apk
-      - name: Publicar en la release "apk"
-        if: github.ref == 'refs/heads/main'
+      - name: Publicar el APK
+        # Los PR desde forks no tienen permiso de escritura: ahí basta con el artefacto.
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release view apk >/dev/null 2>&1 || \
-            gh release create apk --title "NAOSA para Android" \
-              --notes "APK para instalar a mano. Se actualiza en cada cambio de main."
-          gh release upload apk naosa.apk --clobber
+          if [ "$GITHUB_REF" = refs/heads/main ]; then
+            tag=apk; titulo="NAOSA para Android"; extra=""
+            notas="APK para instalar a mano. Se actualiza en cada cambio de main."
+          else
+            tag=apk-prueba; titulo="NAOSA para Android (prueba)"; extra="--prerelease"
+            notas="APK de prueba del último PR. No es la versión estable."
+          fi
+          gh release view "$tag" >/dev/null 2>&1 || \
+            gh release create "$tag" --title "$titulo" --notes "$notas" --target "$GITHUB_SHA" $extra
+          gh release upload "$tag" naosa.apk --clobber
